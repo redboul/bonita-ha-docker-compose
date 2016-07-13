@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  ssl:
+    build: haproxy
+    image: bonitasoft/haproxy
+    ports: 
+     - "80:80"
+     - "443:443"
+    links: 
+      - "cas:cas"
+      - "casservices:casservices"
+      - "bonita:bonita"
+    depends_on:
+      - cas
+      - bonita
+  cas:
+    build: cas
+    image: bonitasoft/java-cas
+  casservices:
+    build: cas-services
+    image: bonitasoft/java-cas-services
+    depends_on:
+      - cas
+  bonita:
+    build: bonita
+    image: bonitasoft/bonita
+    hostname: bonita
+    links: 
+      - "cas:cas"
+    volumes: 
+      - ./bonita/lic:/opt/bonita_home/
