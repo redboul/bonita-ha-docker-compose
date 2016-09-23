@@ -1,7 +1,12 @@
 FROM haproxy:1.6
 
+CMD ["./wait-for-it.sh" ,"bonita:8080"]
+
 COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
+COPY wait-for-it.sh wait-for-it.sh
 COPY docker.io.crt /etc/ssl/docker.io/docker.io.crt
 COPY docker.io.csr /etc/ssl/docker.io/docker.io.csr
 COPY docker.io.pem /etc/ssl/docker.io/docker.io.pem
 COPY docker.io.key /etc/ssl/docker.io/docker.io.key
+
+ENTRYPOINT haproxy -f /usr/local/etc/haproxy/haproxy.cfg
