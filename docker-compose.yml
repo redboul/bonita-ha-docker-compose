@@ -9,7 +9,6 @@ services:
      - "443:443"
     links: 
       - "cas:cas"
-      - "casservices:casservices"
       - "bonita:bonita"
     depends_on:
       - cas
@@ -17,11 +16,6 @@ services:
   cas:
     build: cas
     image: bonitasoft/java-cas
-  casservices:
-    build: cas-services
-    image: bonitasoft/java-cas-services
-    depends_on:
-      - cas
   bonita:
     build: bonita
     image: bonitasoft/bonita
@@ -30,3 +24,5 @@ services:
       - "cas:cas"
     volumes: 
       - ./bonita/lic:/opt/bonita_home/
+    ports: 
+     - "8080:8080"
