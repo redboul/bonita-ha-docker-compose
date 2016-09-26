@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          id="all-in-one" version="2.5">
     <display-name>Bonita</display-name>
@@ -28,11 +28,6 @@
     <filter>
         <filter-name>SecurityFilter</filter-name>
         <filter-class>org.bonitasoft.console.common.server.login.filter.SecurityFilter</filter-class>
-    </filter>
-    <!-- Bonita home Filter -->
-    <filter>
-        <filter-name>BonitaHomeFilter</filter-name>
-        <filter-class>org.bonitasoft.console.common.server.login.filter.BonitaHomeFilter</filter-class>
     </filter>
 
     <!--Rest filter -->
@@ -137,7 +132,7 @@
         -->
         <!-- init-param>
             <param-name>excludePattern</param-name>
-            <param-value>^/(bonita/)?((mobile/)?login.jsp$)|(/mobile/js/)|(portal/themeResource$)|(portal/scripts)|(portal/formsService)</param-value>
+            <param-value>^/(bonita/)?((mobile/)?login.jsp$)|(/mobile/js/)|(portal/themeResource$)|(theme/)|(portal/scripts)|(portal/formsService)</param-value>
         </init-param -->
     </filter>
     <!-- BPM URLSupport filter -->
@@ -167,17 +162,6 @@
         <url-pattern>/portal/homepage</url-pattern>
         <url-pattern>/login.jsp</url-pattern>
     </filter-mapping>
-    <filter-mapping>
-        <filter-name>BonitaHomeFilter</filter-name>
-        <url-pattern>/login.jsp</url-pattern>
-    </filter-mapping>
-    <!-- For platform App -->
-    
-    <filter-mapping>
-        <filter-name>BonitaHomeFilter</filter-name>
-        <url-pattern>/platformLogin.jsp</url-pattern>
-    </filter-mapping>
-    
     <filter-mapping>
         <filter-name>TokenValidatorFilter</filter-name>
         <url-pattern>/API/*</url-pattern>
@@ -252,6 +236,7 @@
         <filter-name>ApplicationResourceCacheFilter</filter-name>
         <url-pattern>/portal/applicationResource</url-pattern>
         <url-pattern>/portal/themeResource</url-pattern>
+        <url-pattern>/theme/*</url-pattern>
         <url-pattern>/portal/pageResource</url-pattern>
     </filter-mapping>
     <!-- Cache Filter Mapping End -->
@@ -268,7 +253,7 @@
     </listener>
     
     <listener>
-        <listener-class>org.bonitasoft.console.common.server.servlet.PlatformTenantListener</listener-class>
+        <listener-class>org.bonitasoft.console.server.servlet.PlatformTenantListenerSP</listener-class>
     </listener>
 
     <servlet>
@@ -367,8 +352,8 @@
     </servlet>
 
     <servlet>
-        <servlet-name>attachmentImage</servlet-name>
-        <servlet-class>org.bonitasoft.console.common.server.servlet.TenantImageServlet</servlet-class>
+        <servlet-name>iconServlet</servlet-name>
+        <servlet-class>org.bonitasoft.console.common.server.servlet.IconServlet</servlet-class>
     </servlet>
 
     <servlet>
@@ -518,12 +503,11 @@
         <servlet-class>org.bonitasoft.forms.server.FormsCacheServlet</servlet-class>
     </servlet>
     <!-- For engine HTTP API -->
-    <!--
-    <servlet>
+    
+    <!--<servlet>
         <servlet-name>HttpAPIServlet</servlet-name>
         <servlet-class>org.bonitasoft.engine.api.internal.servlet.HttpAPIServlet</servlet-class>
-    </servlet>
-    -->
+    </servlet>-->
     
     <!-- For mobile -->
     
@@ -570,9 +554,9 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RestletServletCustomPage</servlet-name>
-	<url-pattern>/portal/custom-page/API/*</url-pattern>
+        <url-pattern>/portal/custom-page/API/*</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>BonitaSPRestAPIServlet</servlet-name>
         <url-pattern>/APIToolkit/*</url-pattern>
     </servlet-mapping>
@@ -593,6 +577,7 @@
     <servlet-mapping>
         <servlet-name>themeResource</servlet-name>
         <url-pattern>/portal/themeResource</url-pattern>
+        <url-pattern>/theme/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SSOService</servlet-name>
@@ -682,8 +667,8 @@
         <url-pattern>/portal/exportActors</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>attachmentImage</servlet-name>
-        <url-pattern>/portal/attachmentImage</url-pattern>
+        <servlet-name>iconServlet</servlet-name>
+        <url-pattern>/API/avatars/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>loginService</servlet-name>
@@ -786,12 +771,12 @@
         <url-pattern>/portal/formsCache/*</url-pattern>
     </servlet-mapping>
     <!-- For engine HTTP API -->
-    <!--
-    <servlet-mapping>
+    
+    <!--<servlet-mapping>
         <servlet-name>HttpAPIServlet</servlet-name>
         <url-pattern>/serverAPI/*</url-pattern>
-    </servlet-mapping>
-    -->
+    </servlet-mapping>-->
+    
 
     <!-- Default page to serve -->
     <welcome-file-list>
