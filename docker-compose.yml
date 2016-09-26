@@ -24,5 +24,3 @@ services:
       - "cas:cas"
     volumes: 
       - ./bonita/lic:/opt/bonita_home/
-    ports: 
-     - "8080:8080"
