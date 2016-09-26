@@ -75,7 +75,7 @@ RUN wget -q ${BASE_URL}/BonitaBPMSubscription-${BONITA_VERSION}-Tomcat-${TOMCAT_
 VOLUME /opt/bonita
 
 # create Volume to store Bonita BPM licenses (*.lic)
-COPY lic /opt/bonita_lic
+VOLUME /opt/bonita_lic
 
 # expose Tomcat port
 EXPOSE 8080

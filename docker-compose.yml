@@ -23,4 +23,4 @@ services:
     links: 
       - "cas:cas"
     volumes: 
-      - ./bonita/lic:/opt/bonita_home/
+      - ./bonita/lic:/opt/bonita_lic/
