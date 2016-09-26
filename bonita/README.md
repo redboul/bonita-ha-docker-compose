@@ -4,7 +4,7 @@ Bonita BPM is an open-source business process management and workflow suite crea
 
 > [wikipedia.org/wiki/Bonita_BPM](http://en.wikipedia.org/wiki/Bonita_BPM)
 
-![logo](https://github.com/bonitasoft/docker/blob/master/bonita/7.0.0/logo.png?raw=true)
+![logo](https://github.com/bonitasoft/docker/blob/master/bonita-performance/7.3/logo.png?raw=true)
 
 # How to use this image
 
