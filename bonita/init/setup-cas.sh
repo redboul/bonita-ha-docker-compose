@@ -9,7 +9,7 @@ echo 'BonitaAuthentication-1 {
     ticketValidatorClass="org.jasig.cas.client.validation.Cas20ServiceTicketValidator" 
     casServerUrlPrefix="http://cas:8080/cas" 
     tolerance="20000" 
-    service="http://192.168.1.35/bonita/loginservice" 
+    service="/bonita/loginservice" 
     defaultRoles="admin,operator" 
     roleAttributeNames="memberOf,eduPersonAffiliation" 
     principalGroupName="CallerPrincipal" 
@@ -27,8 +27,8 @@ echo 'authentication.service.ref.name=jaasAuthenticationService' > ${BONITA_HOME
 sed -i '1{s/^/\#/g};7{s/#//g;}' ${BONITA_HOME_COMMON_PATH}/client/platform/tenant-template/conf/authenticationManager-config.properties
 #sed -i '1{s/^/\#/g};7{s/#//g;}' ${BONITA_HOME_COMMON_PATH}/client/tenants/1/conf/authenticationManager-config.properties
 echo "" >> ${BONITA_HOME_COMMON_PATH}/client/platform/tenant-template/conf/authenticationManager-config.properties
-echo "Cas.serverUrlPrefix = http://192.168.1.35/cas" >> ${BONITA_HOME_COMMON_PATH}/client/platform/tenant-template/conf/authenticationManager-config.properties
-echo "Cas.bonitaServiceURL = http://192.168.1.35/bonita/loginservice" >> ${BONITA_HOME_COMMON_PATH}/client/platform/tenant-template/conf/authenticationManager-config.properties
+echo "Cas.serverUrlPrefix = /cas" >> ${BONITA_HOME_COMMON_PATH}/client/platform/tenant-template/conf/authenticationManager-config.properties
+echo "Cas.bonitaServiceURL = /bonita/loginservice" >> ${BONITA_HOME_COMMON_PATH}/client/platform/tenant-template/conf/authenticationManager-config.properties
 
 #echo "" >> ${BONITA_HOME_COMMON_PATH}/client/tenants/1/conf/authenticationManager-config.properties
 #echo "Cas.serverUrlPrefix = http://192.168.1.35/cas" >> ${BONITA_HOME_COMMON_PATH}/client/tenants/1/conf/authenticationManager-config.properties
